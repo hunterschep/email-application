@@ -104,7 +104,7 @@ public class Email
         try
         {
             //ADD OWN USERNAME, PASSWORD, & DATABASE NAME HERE
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/hunters_db", "root", "a6%iUaWHii1rUW*T399g2aWx*B");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/DATABASENAME", "root", "PASSWORD");
         }
         catch (SQLException e)
         {
