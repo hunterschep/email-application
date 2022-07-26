@@ -13,7 +13,6 @@
 
  */
 
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -189,13 +188,13 @@ public class EmailApplication extends JFrame implements ActionListener
    }
 
    //Methods to parse the first and last names when a full name is submitted
-   public String getFirst(@NotNull String full)
+   public String getFirst(String full)
    {
       int space = full.indexOf(" ");
       return full.substring(0,space);
    }
 
-   public String getLast(@NotNull String full)
+   public String getLast(String full)
    {
       int len = full.length();
       int space = full.indexOf(" ");
