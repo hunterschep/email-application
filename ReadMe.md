@@ -11,6 +11,9 @@ Email Application takes input, generates a user's company email and password, th
 * Company email
 * Password
 
+#### Example:
+![Program & SQL](C:\Users\h2cub\OneDrive\Documents\email-application\images\DEMONSTRATION.jpg)
+
 
 ### How do I use this project?
 
