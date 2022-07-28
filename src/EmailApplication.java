@@ -13,7 +13,6 @@
 
  */
 
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -134,49 +133,41 @@ public class EmailApplication extends JFrame implements ActionListener
          String tempDepartment;
 
          //Input validation(cannot enter empty text field)
-         if (userText1.getText().length() >= 1)
+         if (validateInput(userText1.getText(), userText2.getText(), userText3.getText()))
          {
             tempUser = userText1.getText();
             tempFirst = getFirst(tempUser);
             tempLast = getLast(tempUser);
 
-            //Input validation(cannot enter empty text field)
-            if (userText2.getText().length() >= 1)
+            tempCompany = userText2.getText();
+
+            tempDepartment = userText3.getText();
+            String address;
+            String password;
+            try
             {
-               tempCompany = userText2.getText();
+               //Pass the data gathered from the submitted fields to a new instance of the email class
+               user = new Email(tempFirst, tempLast, tempCompany, tempDepartment);
+               dataBaseSuccess.setText("Successfully Added to Database");
 
-               //Input validation(cannot enter empty text field)
-               if (userText3.getText().length() >= 1)
-               {
-                  tempDepartment = userText3.getText();
-                  String address;
-                  String password;
-                  try
-                  {
-                     //Pass the data gathered from the submitted fields to a new instance of the email class
-                     user = new Email(tempFirst, tempLast, tempCompany, tempDepartment);
-                     dataBaseSuccess.setText("Successfully Added to Database");
+               //Generate the email and password
+               address = user.getAddress();
+               password = user.getPassword();
 
-                     //Generate the email and password
-                     address = user.getAddress();
-                     password = user.getPassword();
-
-                     //Set the text fields to display this
-                     cEmail.setText("Company Email: " + address);
-                     cPassword.setText("Company Password: " + password);
-                  }
-                  //Catch and print SQL exceptions
-                  catch (SQLException ex)
-                  {
-                     System.out.println("Error Code = " + ex.getErrorCode());
-                     System.out.println("SQL state = " + ex.getSQLState());
-                     System.out.println("Message = " + ex.getMessage());
-                     System.out.println("printTrace /n");
-                     ex.printStackTrace();
-                  }
-
-               }
+               //Set the text fields to display this
+               cEmail.setText("Company Email: " + address);
+               cPassword.setText("Company Password: " + password);
             }
+            //Catch and print SQL exceptions
+            catch (SQLException ex)
+            {
+               System.out.println("Error Code = " + ex.getErrorCode());
+               System.out.println("SQL state = " + ex.getSQLState());
+               System.out.println("Message = " + ex.getMessage());
+               System.out.println("printTrace /n");
+               ex.printStackTrace();
+            }
+
          }
          //If text field is empty, display error
          else
@@ -199,6 +190,12 @@ public class EmailApplication extends JFrame implements ActionListener
       int len = full.length();
       int space = full.indexOf(" ");
       return full.substring(space + 1,len);
+   }
+
+   //validate that each field has text >= 1
+   public boolean validateInput(String text1, String text2, String text3)
+   {
+      return text1.length() >= 1 && text2.length() >= 1 && text3.length() >= 1;
    }
 
 }
